@@ -1,17 +1,10 @@
-import { Router, Router } from "express";
+import { Router } from "express";
+import { signupAdmin, loginAdmin } from "../controllers/admin.controller.js";
 const adminRouter = Router();
 
-adminRouter.post("/signup", async (req, res) => {
-    res.json({
-        msg: "signup router"
-    });
-});
+adminRouter.post("/signup", signupAdmin);
 
-adminRouter.post("/login", async (req, res) => {
-    res.json({
-        msg: "login route"
-    });
-});
+adminRouter.post("/login", loginAdmin);
 
 adminRouter.post("/course", (req, res) => {
     res.json({
@@ -19,13 +12,13 @@ adminRouter.post("/course", (req, res) => {
     });
 });
 
-adminRouter.put("/courses", (req, res) => {
+adminRouter.put("/course", (req, res) => {
     res.json({
         msg: "admin"
     });
 });
 
-adminRouter.get("/courses/bulk", (req, res) => {
+adminRouter.get("/course/bulk", (req, res) => {
     res.json({
         msg: "admin"
     });

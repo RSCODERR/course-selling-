@@ -1,16 +1,9 @@
 import { Router } from "express";
 const userRouter = Router();
+import { signupUser, loginUser } from "../controllers/user.controller.js";
 
-userRouter.post("/signup", async (req, res) => {
-    res.json({
-        msg: "signup router"
-    });
-});
+userRouter.post("/signup", signupUser);
 
-userRouter.post("/login", async (req, res) => {
-    res.json({
-        msg: "login route"
-    });
-});
+userRouter.post("/login", loginUser);
 
 export { userRouter };
