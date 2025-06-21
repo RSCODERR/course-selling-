@@ -50,7 +50,7 @@ export const signupAdmin = async (req, res) => {
     try {
 
         const hashedPassword = await bcrypt.hash(password, 5);
-        const user = await Admin.create({
+        const admin = await Admin.create({
             email,
             password: hashedPassword,
             firstName,
@@ -59,7 +59,7 @@ export const signupAdmin = async (req, res) => {
 
         res.json({
             msg: "Signed up successfully",
-            user
+            admin
         });
 
     } catch (error) {
@@ -79,18 +79,18 @@ export const loginAdmin = async (req, res) => {
         });
     };
 
-    const user = await Admin.findOne({ email });
+    const admin = await Admin.findOne({ email });
 
-    if (!user) {
+    if (!admin) {
         return res.status(404).json({
             msg: "User doesn't exist"
         });
     };
 
-    const passwordMatch = await bcrypt.compare(password, user.password)
+    const passwordMatch = await bcrypt.compare(password, admin.password)
 
     if (passwordMatch) {
-        const token = jwt.sign({ id: user.id, email: user.email }, process.env.JWT_TOKEN_SECRET_ADMIN);
+        const token = jwt.sign({ id: admin.id, email: admin.email }, process.env.JWT_TOKEN_SECRET_ADMIN);
 
         res.json({
             msg: "logged in successfully",
