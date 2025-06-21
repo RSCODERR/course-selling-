@@ -49,7 +49,7 @@ export const signupAdmin = async (req, res) => {
 
     try {
 
-        const hashedPassword = await bcrypt.hash(password, 10);
+        const hashedPassword = await bcrypt.hash(password, 5);
         const user = await Admin.create({
             email,
             password: hashedPassword,

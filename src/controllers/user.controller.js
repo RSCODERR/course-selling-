@@ -42,7 +42,7 @@ export const signupUser = async (req, res) => {
         });
     };
 
-    const { email, password, firstName, lastName } = req.body;
+    const { email, password, firstName, lastName } = parsedData.data;
 
     if (!email || !password || !firstName || !lastName) {
         return res.status(400).json({ error: "All fields are required" });
@@ -50,7 +50,7 @@ export const signupUser = async (req, res) => {
 
     try {
 
-        const hashedPassword = await bcrypt.hash(password, 10);
+        const hashedPassword = await bcrypt.hash(password, 5);
         const user = await User.create({
             email,
             password: hashedPassword,
