@@ -44,3 +44,28 @@ export const previewCourse = async (req, res) => {
         });
     };
 };
+
+
+export const userPurchases = async (req, res) => {
+    try {
+        const userId = req.userId;
+
+        const purchases = await Purchase.find({
+            userId
+        });
+
+        if (!purchases.length) { // .find always returns an array so check if it's empty if yes then no courses found
+            return res.json({
+                msg: "no courses found"
+            });
+        }
+
+        res.json({
+            purchases
+        });
+    } catch (error) {
+        res.status(500).json({
+            error: `something went wrong ${error.message}`
+        });
+    };
+};
