@@ -1,4 +1,5 @@
 import { Purchase } from "../models/purchase";
+import { Course } from "../models/course";
 
 export const purchaseCourse = async (req, res) => {
     try {
@@ -60,8 +61,13 @@ export const userPurchases = async (req, res) => {
             });
         }
 
+        const courseData = await Course.find({
+            _id: { $in: purchases.map(x => x.courseId) }
+        });
+
         res.json({
-            purchases
+            purchases,
+            courseData
         });
     } catch (error) {
         res.status(500).json({
